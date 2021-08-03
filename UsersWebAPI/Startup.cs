@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using UsersWebAPI.Data;
 
 namespace UsersWebAPI
 {
@@ -32,6 +34,9 @@ namespace UsersWebAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "UsersWebAPI", Version = "v1" });
             });
+
+            services.AddDbContext<UsersWebAPIContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("UsersWebAPIContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
